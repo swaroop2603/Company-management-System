@@ -2,8 +2,9 @@ const {DataTypes}=require('sequelize')
 const sequelize =require('../sequelize')
 const Company=require('./company')
 const Employees = require('./employyes')
+
 const Chat=sequelize.define('Chat',{
-    char_id:{
+    chat_id:{
         type:DataTypes.UUID,
         primaryKey:true,
 
@@ -17,7 +18,7 @@ createdAt: {
     type:DataTypes.UUID,
     allowNull:false,
     references:{
-        model:this.Employees,
+        model:Employees,
         key:'user_id'
     }
 },
@@ -37,8 +38,13 @@ user_id2:{
             key:'company_id'
         }
     }
-})
+},
+{
+       
+    timestamps: false,
+},)
 Chat.belongsTo(Company,{foreignKey:'company_id',onDelete:'CASCADE'})
 Chat.belongsTo(Employees,{foreignKey:'user_id1',onDelete:'CASCADE'})
 Chat.belongsTo(Employees,{foreignKey:'user_id2',onDelete:'CASCADE'})
+
 module.exports=Chat

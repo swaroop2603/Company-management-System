@@ -41,6 +41,10 @@ const Tasks = sequelize.define('Tasks', {
       key: 'user_id',
     },
   },
+},
+{
+       
+  timestamps: false,
 });
 
 Tasks.belongsTo(Project, { foreignKey: 'project_id', onDelete: 'CASCADE' });

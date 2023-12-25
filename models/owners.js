@@ -25,6 +25,11 @@ const Owners=sequelize.define('Owners',{
 
     
 
+}
+,
+{
+       
+  timestamps: false,
 })
 Owners.belongsTo(Company,{foreignKey:'company_id',onDelete:'CASCADE'})
 Owners.belongsTo(Employees,{foreignKey:'user_id',onDelete:'CASCADE'})

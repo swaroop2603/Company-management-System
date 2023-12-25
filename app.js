@@ -4,12 +4,18 @@ const cors=require('cors');
 const CompanyRouter=require('./routes/company')
 const EmployeeRouter=require('./routes/employees')
 const OwnerRouter=require('./routes/owners')
+const Login=require('./routes/login')
+const Chat=require('./routes/chat')
+const Message=require('./routes/message')
 const app = server();
 app.use(server.json())
 app.use(cors())
 app.use('/CMS',CompanyRouter)
 app.use('/CMS',EmployeeRouter)
 app.use('/CMS',OwnerRouter)
+app.use('/CMS',Login)
+app.use('/CMS',Chat)
+app.use('/CMS',Message)
 const syncDatabase = async () => {
     try {
       await sequelize.sync({ force: false }); 
@@ -23,5 +29,3 @@ const syncDatabase = async () => {
     console.log(`Server is running on port ${PORT}`);
     syncDatabase();
   });
-
-

@@ -9,6 +9,8 @@ const Employees=sequelize.define('Employyes',{
     },
     email:{
         type:DataTypes.STRING,
+        unique:true
+
 
     },
     username:{
@@ -31,6 +33,10 @@ createdAt: {
             key:'company_id'
         }
     }
-})
+},
+{
+       
+    timestamps: false,
+},)
 Employees.belongsTo(Company,{foreignKey:'company_id',onDelete:'CASCADE'})
 module.exports=Employees

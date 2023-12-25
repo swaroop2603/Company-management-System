@@ -35,6 +35,11 @@ const Project = sequelize.define('Project', {
       key: 'company_id',
     },
   },
+}
+,
+{
+       
+  timestamps: false,
 });
 
 Project.belongsTo(Owners, { foreignKey: 'owner_id', onDelete: 'CASCADE' });

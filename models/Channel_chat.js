@@ -32,6 +32,10 @@ const Channel_Chat = sequelize.define('Channel_Chat', {
       key: 'channel_id',
     },
   },
+},
+{
+       
+  timestamps: false,
 });
 
 Channel_Chat.belongsTo(Channel_Users, { foreignKey: 'user_ID', onDelete: 'CASCADE' });

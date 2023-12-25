@@ -15,5 +15,10 @@ const Company=sequelize.define('Company',{
         defaultValue: DataTypes.NOW,
         field: 'created_at', 
       },
-})
+    },
+      {
+       
+        timestamps: false,
+    },
+)
 module.exports=Company

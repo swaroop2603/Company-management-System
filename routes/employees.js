@@ -46,4 +46,20 @@ router.post('/employees',async(req,res)=>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 })
+router.get('/employees',async(req,res)=>{
+    console.log(1)
+try{
+    //console.log(1)
+    const users=await Employees.findOne({where:{user_id:req.query.user_id}})
+    // console.log(users)
+    // console.log(req.query.user_id)
+    if(users){
+        return res.status(200).json(users)
+    }
+    return res.status(404).json("employees not found")
+}catch(error){
+    console.log(1)
+    return res.status(500).json(error)
+}
+})
 module.exports = router;

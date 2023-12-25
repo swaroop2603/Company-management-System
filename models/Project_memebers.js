@@ -20,6 +20,11 @@ const Project_Members = sequelize.define('Project_Members', {
       key: 'user_id',
     },
   },
+}
+,
+{
+       
+  timestamps: false,
 });
 
 Project_Members.belongsTo(Project, { foreignKey: 'project_id', onDelete: 'CASCADE' });

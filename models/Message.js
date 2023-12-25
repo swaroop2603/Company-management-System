@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
 const Chat = require('./chat');
-const Employees = require('./employees');
+const Employees = require('./employyes');
 
 const Message = sequelize.define('Message', {
   message_id: {
@@ -33,6 +33,10 @@ const Message = sequelize.define('Message', {
     defaultValue: DataTypes.NOW,
     field: 'created_at',
   },
+},
+{
+       
+  timestamps: false,
 });
 
 Message.belongsTo(Chat, { foreignKey: 'chat_id', onDelete: 'CASCADE' });

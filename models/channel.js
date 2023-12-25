@@ -32,6 +32,10 @@ const Channel = sequelize.define('Channel', {
       key: 'owner_id',
     },
   },
+},
+{
+       
+  timestamps: false,
 });
 
 Channel.belongsTo(Company, { foreignKey: 'company_id', onDelete: 'CASCADE' });
