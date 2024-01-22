@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const {v4:uuidv4}= require('uuid')
 const Owners=require('../models/owners')
-const {Company_idExists, Employees_idExists} =require('../forigen_keys')
+const {Company_idExists, Employees_idExists,Employees_idExists_Company} =require('../forigen_keys')
 
 router.post('/owners',async(req,res)=>{
     try{
     const {company_id,user_id}=req.body
     owner_id=uuidv4()
     const companyexists=await Company_idExists(company_id)
-    const employeeexists=await Employees_idExists(user_id)
+    const employeeexists=await Employees_idExists_Company(user_id,company_id)
     if(companyexists && employeeexists){
         const owners=await Owners.create({
             owner_id:owner_id,
@@ -28,6 +28,7 @@ router.post('/owners',async(req,res)=>{
     }
 }catch(error){
 console.log(error)
+return res.status(400).json(`error:${error}`)
 }
 })
 module.exports = router;

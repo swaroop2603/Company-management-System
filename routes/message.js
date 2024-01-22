@@ -18,8 +18,15 @@ router.post('/message',async(req,res)=>{
                 chat_id:chat_id,
                 user_id:user_id
             })
-            const response=await Message.findAll({ where: { chat_id: chat_id } })
-            res.status(200).json(response)
+            const response=await Message.findAll({ 
+                where: { chat_id: chat_id },
+            order:[['created_at','ASC']] })
+            data={
+                response,
+                message_id
+            }
+
+            res.status(200).json(data)
         }else {
             res.status(403).json({ error: 'User is not part of the chat' });
         }
@@ -35,7 +42,9 @@ router.get('/message',async(req,res)=>{
     try{
         const {chat_id}=req.query
         console.log(chat_id)
-        const messages=await Message.findAll({where:{chat_id:chat_id}})
+        const messages=await Message.findAll({
+            where:{chat_id:chat_id},
+            order:[['created_at','ASC']]})
         if(!messages){
             return res.status(404).json("no chat found")
         }

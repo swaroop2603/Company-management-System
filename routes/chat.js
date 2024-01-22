@@ -2,15 +2,15 @@ const express=require('express')
 const router=express.Router()
 const Chat = require('../models/chat')
 const Message=require('../models/Message')
-const {Company_idExists, Employees_idExists} =require('../forigen_keys')
+const {Company_idExists, Employees_idExists,Employees_idExists_Company} =require('../forigen_keys')
 const {v4:uuidv4}= require('uuid')
 const { Op } = require('sequelize');
 router.post('/chat',async(req,res)=>{
     try{
     const {company_id,user_id1,user_id2}=req.body
     const companyexists=await Company_idExists(company_id)
-    const user1_exists=await Employees_idExists(user_id1)
-    const user2_exists=await Employees_idExists(user_id2)
+    const user1_exists=await Employees_idExists_Company(user_id1,company_id)
+    const user2_exists=await Employees_idExists_Company(user_id2,company_id)
     if(companyexists && user1_exists && user2_exists){
         console.log(1)
         const chatExists = await Chat.findOne({

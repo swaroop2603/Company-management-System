@@ -62,4 +62,17 @@ try{
     return res.status(500).json(error)
 }
 })
+router.get('/company/employees',async(req,res)=>{
+    try{
+        const {company_id}=req.query
+        const object=await Employees.findAll({
+            where:{
+                company_id:company_id
+            }
+        })
+        return res.status(200).json(object)
+    }catch(error){
+        return res.status(404).json("error")
+    }
+})
 module.exports = router;

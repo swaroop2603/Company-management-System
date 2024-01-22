@@ -2,10 +2,28 @@
 const Company=require('./models/company')
 const Employyes=require('./models/employyes')
 const Chat=require('./models/chat')
+const Owner=require('./models/owners')
+const Channel=require('./models/channel')
 async function Company_idExists(company_id) {
     try{
         const company=await Company.findByPk(company_id)
         return !!company
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
+}
+async function Owner_idExists(owner_id,company_id){
+    try{
+        const owner=await Owner.findByPk(owner_id)
+        console.log(owner)
+        if(owner.company_id===company_id){
+
+            return true
+            }
+    
+            return false
     }
     catch(error){
         console.log(error)
@@ -22,6 +40,24 @@ async function Employees_idExists(user_id){
         throw error
     }
 }
+
+async function Employees_idExists_Company(user_id,company_id){
+    try{
+        const employees=await Employyes.findByPk(user_id)
+        console.log(employees)
+        console.log(company_id)
+        if(employees.company_id===company_id){
+
+        return true
+        }
+
+        return false
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
+}
 async function Chat_idexists(chat_id){
     try{
         const chat=await Chat.findByPk(chat_id)
@@ -32,5 +68,14 @@ async function Chat_idexists(chat_id){
         throw error
     }
 }
+async function channel_idexists(channel_id){
+    try{
+        const channel=await Channel.findByPk(channel_id)
+        return !!channel
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+}
 
-module.exports={Company_idExists,Employees_idExists,Chat_idexists}
+module.exports={Company_idExists,Employees_idExists,Chat_idexists,Employees_idExists_Company, Owner_idExists,channel_idexists}

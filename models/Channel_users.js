@@ -2,12 +2,13 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
 const Channel = require('./channel');
 const Company = require('./company');
-const Employees = require('./employees');
+const Employees = require('./employyes');
 
 const Channel_Users = sequelize.define('Channel_Users', {
   company_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    // primaryKey: true,
     references: {
       model: Company,
       key: 'company_id',
@@ -16,6 +17,7 @@ const Channel_Users = sequelize.define('Channel_Users', {
   user_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    
     references: {
       model: Employees,
       key: 'user_id',
