@@ -6,6 +6,7 @@ const {v4:uuidv4}=require('uuid')
 const router=express.Router()
 const nodemailer = require('nodemailer');
 router.post('/invite',async(req,res)=>{
+  const referringURL = req.headers.referer;
     const {mailid,company_id}=req.body
     const employeesexists=await Employees_mailExists_Company(mailid,company_id)
     if(employeesexists)
@@ -25,7 +26,7 @@ else{
         from: process.env.EMAIL_USER,
         to: mailid,
         subject: 'Subject of the Email',
-        text: `https://65b93b094937021932545deb--rainbow-twilight-1ec57b.netlify.app/invite?mail_id=${mailid}&company_id=${company_id}&token=${token}`,
+        text: `${referringURL}invite?mail_id=${mailid}&company_id=${company_id}&token=${token}`,
         
       };
       

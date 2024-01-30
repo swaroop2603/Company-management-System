@@ -6,6 +6,7 @@ const {v4:uuidv4}=require('uuid')
 const router=express.Router()
 const nodemailer = require('nodemailer');
 router.post('/resetlink',async(req,res)=>{
+    const referringURL = req.headers.referer;
     const {mailid}=req.body
     const employeeexits=await Employees_mailExists(mailid)
     if(employeeexits)
@@ -24,11 +25,11 @@ router.post('/resetlink',async(req,res)=>{
             from: process.env.EMAIL_USER,
             to: mailid,
             subject: 'Subject of the Email',
-            text: `]https://65b93b094937021932545deb--rainbow-twilight-1ec57b.netlify.app/reset?mail_id=${mailid}&token=${token}`,
+            text: `${referringURL}reset?mail_id=${mailid}&token=${token}`,
             
           };
           
-          // Send the email
+          // Sen the email
           transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
               console.error('Error sending email:', error);
