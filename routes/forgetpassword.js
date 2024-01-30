@@ -24,7 +24,7 @@ router.post('/resetlink',async(req,res)=>{
             from: process.env.EMAIL_USER,
             to: mailid,
             subject: 'Subject of the Email',
-            text: `http://localhost:3000/reset?mail_id=${mailid}&token=${token}`,
+            text: `]https://65b93b094937021932545deb--rainbow-twilight-1ec57b.netlify.app/reset?mail_id=${mailid}&token=${token}`,
             
           };
           

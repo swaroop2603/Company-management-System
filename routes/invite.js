@@ -25,7 +25,7 @@ else{
         from: process.env.EMAIL_USER,
         to: mailid,
         subject: 'Subject of the Email',
-        text: `http://localhost:3000/invite?mail_id=${mailid}&company_id=${company_id}&token=${token}`,
+        text: `https://65b93b094937021932545deb--rainbow-twilight-1ec57b.netlify.app/invite?mail_id=${mailid}&company_id=${company_id}&token=${token}`,
         
       };
       
