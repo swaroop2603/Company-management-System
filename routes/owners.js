@@ -31,4 +31,15 @@ console.log(error)
 return res.status(400).json(`error:${error}`)
 }
 })
+router.get('/owners',async(req,res)=>{
+    const {company_id}=req.query
+    console.log("company_id",company_id)
+    const response =await Owners.findOne({
+        where:{
+            company_id:company_id
+            
+        }
+    })
+    return res.status(200).json(response) 
+})
 module.exports = router;

@@ -58,6 +58,46 @@ async function Employees_idExists_Company(user_id,company_id){
         throw error
     }
 }
+
+async function Employees_mailExists_Company(mail_id,company_id){
+    try{
+        const employees=await Employyes.findOne({
+            where:{
+                email:mail_id
+            }
+        })
+        console.log(employees)
+        console.log(company_id)
+        if(!employees){
+            return false
+        }
+        if(employees.company_id===company_id){
+
+        return true
+        }
+
+        return false
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
+}
+async function Employees_mailExists(mail_id){
+    try{
+        const employees=await Employyes.findOne({
+            where:{
+                email:mail_id
+            }
+        })
+        console.log(employees)
+        return !!employees
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
+}
 async function Chat_idexists(chat_id){
     try{
         const chat=await Chat.findByPk(chat_id)
@@ -78,4 +118,4 @@ async function channel_idexists(channel_id){
     }
 }
 
-module.exports={Company_idExists,Employees_idExists,Chat_idexists,Employees_idExists_Company, Owner_idExists,channel_idexists}
+module.exports={Company_idExists,Employees_mailExists,Employees_idExists,Chat_idexists,Employees_idExists_Company, Owner_idExists,channel_idexists,Employees_mailExists_Company}

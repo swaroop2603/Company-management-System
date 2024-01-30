@@ -12,10 +12,14 @@ const Message=require('./routes/message')
 const Channel=require('./routes/channels')
 const Channel_Chat=require('./routes/channel_chat')
 const Channel_Users=require('./routes/channel_users')
+const invite=require('./routes/invite')
+const resetlink=require('./routes/forgetpassword')
 const app = server();
 const server_http=http.createServer(app)
 const {v4:uuidv4}= require('uuid');
 const { channel } = require('diagnostics_channel');
+require('dotenv').config();
+
 const io = require('socket.io')(server_http, { cors: { origin: "*" } });
 
 app.use(server.json())
@@ -60,6 +64,8 @@ app.use('/CMS',Message)
 app.use('/CMS',Channel)
 app.use('/CMS',Channel_Chat)
 app.use('/CMS',Channel_Users)
+app.use('/CMS',invite)
+app.use('/CMS',resetlink)
 const syncDatabase = async () => {
     try {
       await sequelize.sync({ force: false }); 

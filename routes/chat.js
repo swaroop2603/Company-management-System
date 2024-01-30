@@ -85,4 +85,32 @@ catch(error){
     console.log(error)
 }
 })
+router.get('/chat/id',async(req,res)=>{
+    console.log(1)
+    try{
+        // console.log(user_id)
+    const {user_id1,user_id2}=req.query
+    
+    const userexists1=await Employees_idExists(user_id1)
+    const userexists2=await Employees_idExists(user_id2)
+    if(userexists1&&userexists2){
+        const company_obj=await Chat.findOne({where: {
+         [Op.or]:[
+            { user_id1: user_id1, user_id2: user_id2 },
+                    { user_id1: user_id2, user_id2: user_id1 }
+         ]
+          }},)
+        
+        res.status(200).json(company_obj)
+
+    }
+    else{
+        res.status(404).json("not found")
+    }
+}
+catch(error){
+    res.status(400).json("internal server error")
+    console.log(error)
+}
+})
 module.exports=router
