@@ -35,7 +35,9 @@ router.put('/forgot_password', async (req, res) => {
   try {
     const referringURL = req.headers.referer;
     const { email, password,token } = req.body;
+    console.log(token)
     const token_availabe=await Tokens_invite.findByPk(token)
+    console.log(token_availabe)
     if(!token_availabe){
         return res.status(404).json({"error":"invalid token"})
 
@@ -57,7 +59,7 @@ router.put('/forgot_password', async (req, res) => {
       {accepted:true},
       {where:{
           UUIDs:token,
-          accepted:true
+          accepted:false
       }}
 
 
