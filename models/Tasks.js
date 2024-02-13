@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../sequelize');
 const Project = require('./Project');
-const Project_Members = require('./Project_members');
-
+const Project_Members = require('./Project_memebers');
+const Company = require('./company');
 const Tasks = sequelize.define('Tasks', {
   task_id: {
     type: DataTypes.UUID,
@@ -33,12 +33,13 @@ const Tasks = sequelize.define('Tasks', {
       key: 'project_id',
     },
   },
-  user_ID: {
+  company_id: {
     type: DataTypes.UUID,
     allowNull: false,
+   
     references: {
-      model: Project_Members,
-      key: 'user_id',
+      model: Company,
+      key: 'company_id',
     },
   },
 },
@@ -46,8 +47,8 @@ const Tasks = sequelize.define('Tasks', {
        
   timestamps: false,
 });
-
+Tasks.belongsTo(Company, { foreignKey: 'company_id', onDelete: 'CASCADE' });
 Tasks.belongsTo(Project, { foreignKey: 'project_id', onDelete: 'CASCADE' });
-Tasks.belongsTo(Project_Members, { foreignKey: 'user_ID', onDelete: 'CASCADE' });
+
 
 module.exports = Tasks;

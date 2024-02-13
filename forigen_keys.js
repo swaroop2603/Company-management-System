@@ -4,6 +4,9 @@ const Employyes=require('./models/employyes')
 const Chat=require('./models/chat')
 const Owner=require('./models/owners')
 const Channel=require('./models/channel')
+const Project=require('./models/Project')
+const Project_Members=require('./models/Project_memebers')
+const Tasks=require('./models/Tasks')
 async function Company_idExists(company_id) {
     try{
         const company=await Company.findByPk(company_id)
@@ -117,5 +120,52 @@ async function channel_idexists(channel_id){
         throw error
     }
 }
+async function Project_exits(project_id,company_id){
+    try{
+const project=await Project.findOne({
+    where:{
+        "project_id":project_id,
+        "company_id":company_id
+    }
+})
+return !!project
+    }catch(error){
+        console.log(error)
+        throw error
 
-module.exports={Company_idExists,Employees_mailExists,Employees_idExists,Chat_idexists,Employees_idExists_Company, Owner_idExists,channel_idexists,Employees_mailExists_Company}
+    }
+}
+async function user_idExists_project(user_id,project_id){
+    try{
+        const memebers=await Project_Members.findOne({
+            where:{
+                "user_id":user_id,
+                "project_id":project_id
+            }
+        })
+       
+        
+
+        return !!memebers
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
+}
+async function Tasks_exits(task_id,project_id){
+    try{
+const tasks=await Tasks.findOne({
+    where:{
+        "project_id":project_id,
+        "task_id":task_id
+    }
+})
+return !!task_id
+    }catch(error){
+        console.log(error)
+        throw error
+
+    }
+}
+module.exports={Company_idExists,Employees_mailExists,Employees_idExists,Chat_idexists,Employees_idExists_Company, Owner_idExists,channel_idexists,Employees_mailExists_Company,Project_exits,user_idExists_project,Tasks_exits}

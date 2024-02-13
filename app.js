@@ -15,6 +15,10 @@ const Channel_Users=require('./routes/channel_users')
 const invite=require('./routes/invite')
 const resetlink=require('./routes/forgetpassword')
 const callbacks=require('./routes/callbacks')
+const Project=require('./routes/project')
+const Project_memebers=require('./routes/projectmembers')
+const Tasks=require('./routes/tasks')
+const Task_users=require('./routes/task_users')
 const app = server();
 const server_http=http.createServer(app)
 const {v4:uuidv4}= require('uuid');
@@ -68,6 +72,10 @@ app.use('/CMS',Channel_Users)
 app.use('/CMS',invite)
 app.use('/CMS',resetlink)
 app.use('/CMS',callbacks)
+app.use('/CMS',Project)
+app.use('/CMS',Project_memebers)
+app.use('/CMS',Tasks)
+app.use('/CMS',Task_users)
 const syncDatabase = async () => {
     try {
       await sequelize.sync({ force: false }); 
